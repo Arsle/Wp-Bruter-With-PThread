@@ -12,7 +12,7 @@ error_reporting(0);
 
 *    Janissaries.Org
 
-*	 wwww.Arsle.org
+*    wwww.Arsle.org
 
 */
 class threadle extends Thread{
